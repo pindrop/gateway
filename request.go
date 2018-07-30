@@ -44,6 +44,9 @@ func NewRequest(ctx context.Context, e events.APIGatewayProxyRequest) (*http.Req
 		return nil, errors.Wrap(err, "creating request")
 	}
 
+	// Add lambda context
+	req = req.WithContext(ctx)
+
 	// remote addr
 	req.RemoteAddr = e.RequestContext.Identity.SourceIP
 
