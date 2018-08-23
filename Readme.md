@@ -22,7 +22,8 @@ func main() {
 
 func hello(w http.ResponseWriter, r *http.Request) {
 	// example retrieving values from the api gateway proxy request context.
-	requestContext, ok := gateway.RequestContext(r.Context())
+	request, ok := gateway.RequestContext(r.Context())
+	requestContext := request.RequestContext
 	if !ok || requestContext.Authorizer["sub"] == nil {
 		fmt.Fprint(w, "Hello World from Go")
 		return
